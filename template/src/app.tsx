@@ -5,9 +5,9 @@ import Router from 'preact-router';
 import { Provider, connect } from 'preact-redux'
 
 
-export default ({ store }) => (
+const App = ({ store }) => (
     <Provider store={store}>
-        <div>
+        <div id="app">
             <Router>
                 <div default>
                     PWA
@@ -16,3 +16,5 @@ export default ({ store }) => (
         </div>
     </Provider>
 )
+
+export default App;
