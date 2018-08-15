@@ -1,0 +1,96 @@
+// Breakpoints
+$breakpoints: (
+    // Handset
+        // - Portrait
+        handset-small-portrait: 360px,
+        handset-medium-portrait: 400px,
+        handset-large-portrait: 600px,
+
+        // - Landscape
+        handset-small-landscape: handset-large-portrait,
+        handset-medium-landscape: 720px,
+        handset-large-landscape: 960px,
+
+    // Tablet
+        // - Portrait
+        tablet-small-portrait: handset-medium-landscape,
+        tablet-large-portrait: 840px,
+
+        // - Landscape
+        tablet-small-landscape: 1024px,
+        tablet-large-landscape: 1280px,
+
+    // Desktop
+    desktop-small-1440: 1440px,
+    desktop-medium-1600: 1600px,
+    desktop-large-1920: 1920px
+);
+
+@mixin mediaQuery($breakpoint) { 
+    @if map-has-key($breakpoints, $breakpoint) {
+        @media (max-width: #{map-get($breakpoints, $breakpoint)}) {
+            @content;
+        }
+    }
+
+    @else {
+        @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. " + "Please make sure it is defined in `$breakpoints` map.";
+    }
+}
+
+@mixin mediaQueryMinWidth($breakpoint) { 
+    @if map-has-key($breakpoints, $breakpoint) {
+        @media (min-width: #{map-get($breakpoints, $breakpoint)}) {
+            @content;
+        }
+    }
+
+    @else {
+        @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. " + "Please make sure it is defined in `$breakpoints` map.";
+    }
+}
+
+// Box sizing
+@mixin box-sizing($sizing: border-box) {
+    box-sizing: $sizing;
+    -webkit-box-sizing: $sizing;
+    -moz-box-sizing: $sizing;
+}
+
+// Transform prefixes
+@mixin transform($transform) {
+    -webkit-transform: $transform;
+    -moz-transform: $transform;
+    -ms-transform: $transform;
+    -o-transform: $transform;
+}
+
+// Item counter
+%counter {
+    counter-reset: step;
+
+    .counter-item {
+        &::before {
+            counter-increment: step;
+            content: counter(step);
+        }
+    }
+}
+
+// Material icons
+%materialIcons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+    color: rgba(0, 0, 0, 0.54);
+}
